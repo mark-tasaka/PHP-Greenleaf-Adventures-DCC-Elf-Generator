@@ -39,6 +39,7 @@
     include 'php/languages.php';
     include 'php/familiar.php';
     include 'php/patron.php';
+    include 'php/armour.php';
     
 
         if(isset($_POST["theCharacterName"]))
@@ -166,6 +167,41 @@
 
         $nameGenMessage = getNameDescript($givenName, $surname);
         $generationMessage = generationMesssage ($abilityScoreGen);
+
+        
+    
+        if(isset($_POST["theArmour"]))
+        {
+            $armour = $_POST["theArmour"];
+        }
+    
+        $armourName = getArmour($armour)[0];
+        
+        $armourACBonus = getArmour($armour)[1];
+        $armourCheckPen = getArmour($armour)[2];
+        $armourSpeedPen = getArmour($armour)[3];
+        $armourFumbleDie = getArmour($armour)[4];
+
+        if(isset($_POST['theCheckBoxShield']) && $_POST['theCheckBoxShield'] == 1) 
+        {
+            $shieldName = getArmour(10)[0];
+            $shieldACBonus = getArmour(10)[1];
+            $shieldCheckPen = getArmour(10)[2];
+            $shieldSpeedPen = getArmour(10)[3];
+            $shieldFumbleDie = getArmour(10)[4];
+        }
+        else
+        {
+            $shieldName = getArmour(11)[0];
+            $shieldACBonus = getArmour(11)[1];
+            $shieldCheckPen = getArmour(11)[2];
+            $shieldSpeedPen = getArmour(11)[3];
+            $shieldFumbleDie = getArmour(11)[4];
+        } 
+
+       $totalAcDefense = $armourACBonus + $shieldACBonus;
+       $totalAcCheckPen = $armourCheckPen + $shieldCheckPen;
+       $speedPenality = $armourSpeedPen;
     
 
        $speed = 30;
@@ -646,8 +682,6 @@ else
            ?>
         </span>
        
-       
-       
               
          <span id="alignment">
            <?php
@@ -659,6 +693,65 @@ else
            <?php
                 echo $speed . '\'';
            ?></span>
+
+              
+        <span id="armourName">
+           <?php
+           if($armourName == "")
+           {
+               echo $shieldName;
+           }
+           else if($shieldName == "")
+           {
+                echo $armourName;
+           }
+           else
+           {
+            echo $armourName . " & " . $shieldName;
+           }
+           ?>
+        </span>
+
+        <span id="armourACBonus">
+            <?php
+                echo $totalAcDefense;
+            ?>
+        </span>
+
+        
+        <span id="armourACCheckPen">
+            <?php
+                echo $totalAcCheckPen;
+            ?>
+        </span>
+        
+        <span id="armourACSpeedPen">
+            <?php
+            if($speedPenality == 0)
+            {
+                echo "-";
+            }
+            else
+            {
+                echo "-" . $speedPenality;
+            }
+            ?>
+        </span>
+
+        <span id="fumbleDie">
+            <?php
+            if($armourName == "")
+            {
+                echo $shieldFumbleDie;
+            }
+            else
+            {
+                echo $armourFumbleDie;
+            }
+            ?>
+        </span>
+
+
         
         
         <span id="attackBonus">
