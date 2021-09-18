@@ -97,9 +97,8 @@ body{
 #armourName{
     position:absolute;
     top: 905px;
-    left: 55px;
+    left: 45px;
     font-size: 0.8em;
-    width: 300px;
 }
 
 #armourAc{
@@ -560,7 +559,7 @@ body{
 
 #patronDescription{
     position:absolute;
-    top: 853px;
+    top: 855px;
     left: 390px;
     font-size: 0.7em;
     width: 250px;

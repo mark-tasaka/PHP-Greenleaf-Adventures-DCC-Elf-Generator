@@ -221,7 +221,7 @@
        
        $baseArmourClass = getAC($agilityMod, $luckMod, $luckySign[0]);
 
-       $armourClass = $baseArmourClass;
+       $armourClass = $baseArmourClass + $totalAcDefense;
 
        $ref = savingThrowReflex($level);
        $ref += $agilityMod;
